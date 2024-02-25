@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HSProject.MainPage"
+             BackgroundColor="{StaticResource BGGray}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Grid
+                RowDefinitions="50"
+                ColumnDefinitions="90, 90, 90, 90, 90, 90, 90, 90, 90, 90"
+                Padding="15"
+                BackgroundColor="Black">
+                
+                <Button
+                    Grid.Column="4"
+                    Grid.Row="0"
+                    Text="Statistics"
+                    Clicked="OnClickedGoToStats"
+                    BackgroundColor="DarkSlateGray"
+                    FontSize="13"
+                    TextColor="White"></Button>
+                <Button
+                    Grid.Column="6"
+                    Grid.Row="0"
+                    Text="Standings"
+                    FontSize="13"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="White"></Button>
+                <Button
+                    Grid.Column="8"
+                    Grid.Row="0"
+                    Text="Schedule"
+                    Clicked="OnClickedGoToSchedule"
+                    FontSize="13"
+                    BackgroundColor="DarkSlateGray"
+                    TextColor="White"></Button>
+            </Grid>
+
+
+            <Grid
+                RowDefinitions="20, 40, 20"
+                ColumnDefinitions="100, 100, 100, 100, 100, 100, 100, 100, 100"
+                BackgroundColor="{StaticResource Gray950}">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Text="{Binding ScoreTomorrow.games[0].homeTeam.name._default}"
+                    TextColor="White"></Label>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Text="{Binding ScoreTomorrow.games[0].startTimeUTC}"
+                    TextColor="DarkSlateGrey"></Label>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Text="{Binding ScoreTomorrow.games[0].awayTeam.name._default}"
+                    TextColor="White"></Label>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    Text="{Binding ScoreTomorrow.games[1].homeTeam.name._default}"
+                    TextColor="White"></Label>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Text="{Binding ScoreTomorrow.games[1].startTimeUTC}"
+                    TextColor="DarkSlateGrey"></Label>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="4"
+                    Text="{Binding ScoreTomorrow.games[1].awayTeam.name._default}"
+                    TextColor="White"></Label>
+            </Grid>
+
+            
+            
+            
+
+            
+            
+            
+            
+            
+            <Label
+                Text="Scores summary"
+                TextColor="White"
+                HorizontalOptions="Center"
+                FontSize="20"></Label>
+
+            <Grid
+                RowDefinitions="50"
+                ColumnDefinitions="130, 110, 110, 100, 100, 120, 120"
+                Padding="15"
+                BackgroundColor="{StaticResource BGGray}">
+
+                <Button
+                    Grid.Column="2"
+                    Text="Yesterday"
+                    BackgroundColor="{StaticResource Gray950}"
+                    TextColor="White"
+                    FontSize="15"></Button>
+                <Button
+                    Grid.Column="4"
+                    Text="Today"
+                    BackgroundColor="{StaticResource Gray950}"
+                    TextColor="White"
+                    FontSize="15"></Button>
+                <Button
+                    Grid.Column="6"
+                    Text="Tomorrow"
+                    BackgroundColor="{StaticResource Gray950}"
+                    TextColor="White"
+                    FontSize="15"></Button>
+            </Grid>
+
+
+            <ListView ItemsSource="{Binding ScoreToday.games}" ItemSelected="OnScoreSummaryGameSelected" >
+                <ListView.ItemTemplate>
+                    
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid   Padding="5"
+                RowDefinitions="10, *"
+                ColumnDefinitions="80, 80, 80, 80, 10, 5, 19, 90, 6, 80, 10, 50, 200, 100, 80, 80, 80"
+                ColumnSpacing="5">
+
+                                <Label
+                Grid.Column="1"
+                Grid.Row="2"
+                Text="{Binding Score.period}"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                FontSize="15"
+                TextColor="Green"></Label>
+
+                                <Label
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Text="{Binding Score.timeInPeriod}"
+                        FontSize="15"
+                        TextColor="Green"></Label>
+                                <Label
+                        Grid.Column="3"
+                        Grid.Row="2"
+                                    FontSize="20"
+                        Text="|"></Label>
+                                <Label
+                        Grid.Column="4"
+                        Grid.Row="2"
+                        Text="{Binding homeTeam.score}"
+                        FontSize="15"
+                        TextColor="Green"></Label>
+                                <Label
+                                    Grid.Column="5"
+                                    Grid.Row="5"
+                                    Text="-"
+                                    TextColor="White"
+                                    FontSize="15"></Label>
+                                <Label
+                        Grid.Row="2"
+                        Grid.Column="6"
+                        Text="{Binding awayTeam.score}"
+                        FontSize="15"
+                        TextColor="Green"></Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="7"
+                                    Text="{Binding homeTeam.name._default}"
+                                    FontSize="15"
+                                    TextColor="White"></Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="8"
+                                    Text="-"
+                                    FontSize="15"
+                                    TextColor="White"></Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="9"
+                                    Text="{Binding awayTeam.name._default}"
+                                    FontSize="15"
+                                    TextColor="White"></Label>
+                                <Image
+                                    Grid.Row="2"
+                                    Grid.Column="11"
+                                    HeightRequest="30"
+                                    Source="{Binding goals[0].mugshot}"></Image>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="12"
+                                    FontSize="15"
+                                    Text="{Binding goals[0].name._default, StringFormat='Last scorer: {0}'}"
+                                    TextColor="Green"></Label>
+
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

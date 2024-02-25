@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HSProject.Views.SchedulePage"
+             Title="SchedulePage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Spelade matcher"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+
+
+        <ListView ItemsSource="{Binding Score.games}" ItemSelected="OnScheduleViewGameSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid   Padding="5"
+                        RowDefinitions="10, *"
+                        ColumnDefinitions="80, 80, 80, 80, 80, *"
+                        ColumnSpacing="5">
+                            
+                            <Label
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Text="{Binding homeTeam.abbrev}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        FontSize="15"
+                        TextColor="DarkBlue"></Label>
+
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Text="{Binding homeTeam.score}"
+                                FontSize="15"
+                                TextColor="Black"></Label>
+                            <Label
+                                Grid.Column="3"
+                                Grid.Row="2"
+                                Text="{Binding gameOutcome.lastPeriodType}"></Label>
+                            <Label
+                                Grid.Column="4"
+                                Grid.Row="2"
+                                Text="{Binding awayTeam.score}"
+                                FontSize="15"
+                                TextColor="Black"></Label>
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="5"
+                                Text="{Binding awayTeam.abbrev}"
+                                FontSize="15"
+                                TextColor="DarkBlue"></Label>
+                                
+                          
+                            
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+</ContentPage>
