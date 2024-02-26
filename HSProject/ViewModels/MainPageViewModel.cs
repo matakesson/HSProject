@@ -11,28 +11,50 @@ namespace HSProject.ViewModels
     {
         public Models.Score ScoreToday { get; set; }
         public Models.Score ScoreTomorrow { get; set; }
+        public Models.Score ScoreOnDisplay { get; set; }
+        public Models.Score ScoreYesterday { get; set; }
         
 
-        public MainPageViewModel(string date = "now")
+        public MainPageViewModel(string date)
         {
-            var task = Task.Run(() => GetScoreAsync(date));
+            DateTime tomorrowDate = DateTime.Now.AddDays(+1);
+            DateTime yesterdayDate = DateTime.Now.AddDays(-1);
+            DateTime todayDate = DateTime.Now.AddDays(+0);
             
-            DateTime tomorrowDate = DateTime.Now.AddDays(+0);
+            string todayDateString = todayDate.ToString("yyyy-MM-dd");
             string tomorrowDateString = tomorrowDate.ToString("yyyy-MM-dd");
+            string yesterdayDateString = yesterdayDate.ToString("yyyy-MM-dd");
+            
+            var task = Task.Run(() => GetScoreAsync(todayDateString));
+            var task3 = Task.Run(() => GetScoreAsync(yesterdayDateString));
             var task2 = Task.Run(() => GetScoreAsync(tomorrowDateString));
            
             task.Wait();
             task2.Wait();
+            task3.Wait();
 
             ScoreTomorrow = task2.Result;
             ScoreToday = task.Result;
+            ScoreYesterday = task3.Result;
+
+            if (date == "today")
+            {
+                ScoreOnDisplay = ScoreToday;
+            }
+            else if (date == "yesterday")
+            {
+                ScoreOnDisplay = ScoreYesterday;
+            }
+            else if (date == "tomorrow") 
+            {
+                ScoreOnDisplay = ScoreTomorrow;
+            }
         }
 
-        public async Task<Models.Score> GetScoreAsync(string date = "now")
+        public async Task<Models.Score> GetScoreAsync(string date)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://api-web.nhle.com/v1/score/");
-            string now = DateTime.Now.ToString("yyyy-MM-dd");
             Models.Score scores = null;
 
             HttpResponseMessage response = await client.GetAsync(date);
@@ -43,5 +65,6 @@ namespace HSProject.ViewModels
             }
             return scores;
         }
+
     }
 }

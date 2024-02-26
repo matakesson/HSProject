@@ -41,48 +41,37 @@
             </Grid>
 
 
-            <Grid
-                RowDefinitions="20, 40, 20"
-                ColumnDefinitions="100, 100, 100, 100, 100, 100, 100, 100, 100"
-                BackgroundColor="{StaticResource Gray950}">
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Text="{Binding ScoreTomorrow.games[0].homeTeam.name._default}"
-                    TextColor="White"></Label>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Text="{Binding ScoreTomorrow.games[0].startTimeUTC}"
-                    TextColor="DarkSlateGrey"></Label>
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="3"
-                    Text="{Binding ScoreTomorrow.games[0].awayTeam.name._default}"
-                    TextColor="White"></Label>
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="4"
-                    Text="{Binding ScoreTomorrow.games[1].homeTeam.name._default}"
-                    TextColor="White"></Label>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="4"
-                    Text="{Binding ScoreTomorrow.games[1].startTimeUTC}"
-                    TextColor="DarkSlateGrey"></Label>
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="4"
-                    Text="{Binding ScoreTomorrow.games[1].awayTeam.name._default}"
-                    TextColor="White"></Label>
-            </Grid>
-
-            
-            
-            
-
-            
-            
+            <CollectionView ItemsSource="{Binding ScoreTomorrow.games}"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10"
+                              BackgroundColor="{StaticResource Gray950}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="35"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1"
+                                   Text="{Binding homeTeam.name._default}"
+                                   LineBreakMode="TailTruncation"
+                                   TextColor="White"/>
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding startTimeUTC}"
+                                   TextColor="DarkSlateGray"/>
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding awayTeam.name._default}"
+                                   TextColor="White"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             
             
             
@@ -102,6 +91,7 @@
                     Grid.Column="2"
                     Text="Yesterday"
                     BackgroundColor="{StaticResource Gray950}"
+                    Clicked="OnClickedYesterdayGames"
                     TextColor="White"
                     FontSize="15"></Button>
                 <Button
@@ -109,17 +99,19 @@
                     Text="Today"
                     BackgroundColor="{StaticResource Gray950}"
                     TextColor="White"
+                    Clicked="OnClickedTodayGames"
                     FontSize="15"></Button>
                 <Button
                     Grid.Column="6"
                     Text="Tomorrow"
                     BackgroundColor="{StaticResource Gray950}"
                     TextColor="White"
+                    Clicked="OnClickedTomorrowGames"
                     FontSize="15"></Button>
             </Grid>
 
 
-            <ListView ItemsSource="{Binding ScoreToday.games}" ItemSelected="OnScoreSummaryGameSelected" >
+            <ListView ItemsSource="{Binding ScoreOnDisplay.games}" ItemSelected="OnScoreSummaryGameSelected" >
                 <ListView.ItemTemplate>
                     
                     <DataTemplate>
@@ -132,11 +124,9 @@
                                 <Label
                 Grid.Column="1"
                 Grid.Row="2"
-                Text="{Binding Score.period}"
-                HorizontalOptions="Start"
-                VerticalOptions="Center"
-                FontSize="15"
-                TextColor="Green"></Label>
+                Text="{Binding startTimeUTC}"
+                FontSize="13"
+                TextColor="White"></Label>
 
                                 <Label
                         Grid.Column="2"

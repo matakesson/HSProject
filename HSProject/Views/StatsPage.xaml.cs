@@ -1,3 +1,5 @@
+using HSProject.ViewModels;
+
 namespace HSProject.Views;
 
 public partial class StatsPage : ContentPage

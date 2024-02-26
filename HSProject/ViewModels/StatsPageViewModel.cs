@@ -1,4 +1,5 @@
 ﻿
+using HSProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace HSProject.ViewModels
 
         public StatsPageViewModel()
         {
-            var task = Task.Run(() => GetStatsAsync());
+            var task = Task.Run(() => GetStatsAsync("CAR"));
             task.Wait();
             Stats = task.Result;
             foreach(var s in Stats.skaters)
@@ -30,11 +31,10 @@ namespace HSProject.ViewModels
         }
 
 
-        public static async Task<Models.Stats> GetStatsAsync()
+        public static async Task<Models.Stats> GetStatsAsync(string team)
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri("https://api-web.nhle.com/v1/club-stats/CAR/");
-            //client.DefaultRequestHeaders.Add("X-Api-Key", "NQBhctmRhp1rRFOsQHdOQQ==ZFpr8XVms1v6M14C");
+            client.BaseAddress = new Uri($"https://api-web.nhle.com/v1/club-stats/{team}/");
             Models.Stats stats = null;
 
             HttpResponseMessage response = await client.GetAsync("now");
@@ -46,7 +46,7 @@ namespace HSProject.ViewModels
             return stats;
         }
 
-        public void CalculateRatingSkater(Models.Skater skater)
+        public static void CalculateRatingSkater(Models.Skater skater)
         {
             float rating = 6; // Starting point
             
@@ -69,7 +69,7 @@ namespace HSProject.ViewModels
             skater.averageRating = Math.Max(1, Math.Min(10, rating));
         }
 
-        public void CalculateRatingGoalie(Models.Goaly goalie)
+        public static void CalculateRatingGoalie(Models.Goaly goalie)
         {
             float rating = 6; // Starting point
 
@@ -87,5 +87,6 @@ namespace HSProject.ViewModels
             // Ensure rating stays within 1-10 range
             goalie.averageRating = Math.Max(1, Math.Min(10, rating));
         }
+        
     }
 }

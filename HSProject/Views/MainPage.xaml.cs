@@ -8,7 +8,7 @@ namespace HSProject
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.MainPageViewModel();
+            BindingContext = new ViewModels.MainPageViewModel("today");
         }
 
         
@@ -32,6 +32,24 @@ namespace HSProject
                 page.BindingContext = game;
                 await Navigation.PushAsync(page);
             }
+        }
+
+        private async void OnClickedYesterdayGames(object sender, EventArgs e)
+        {
+            InitializeComponent();
+            BindingContext = new ViewModels.MainPageViewModel("yesterday");
+        }
+
+        private void OnClickedTodayGames(object sender, EventArgs e)
+        {
+            InitializeComponent();
+            BindingContext = new ViewModels.MainPageViewModel("today");
+        }
+
+        private void OnClickedTomorrowGames(object sender, EventArgs e)
+        {
+            InitializeComponent();
+            BindingContext = new ViewModels.MainPageViewModel("tomorrow");
         }
     }
 
