@@ -55,7 +55,7 @@ namespace HSProject.Models
 
     public class Lastname
     {
-        [JsonPropertyName("default")]   
+        [JsonPropertyName("default")]
         public string _default { get; set; }
         public string cs { get; set; }
         public string fi { get; set; }

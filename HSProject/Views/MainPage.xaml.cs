@@ -34,22 +34,13 @@ namespace HSProject
             }
         }
 
-        private async void OnClickedYesterdayGames(object sender, EventArgs e)
+        private async void OnGamesButtonClicked(object sender, EventArgs e)
         {
-            InitializeComponent();
-            BindingContext = new ViewModels.MainPageViewModel("yesterday");
-        }
+            var button = (Button)sender;
+            string date = button.Text.ToLower(); 
 
-        private void OnClickedTodayGames(object sender, EventArgs e)
-        {
             InitializeComponent();
-            BindingContext = new ViewModels.MainPageViewModel("today");
-        }
-
-        private void OnClickedTomorrowGames(object sender, EventArgs e)
-        {
-            InitializeComponent();
-            BindingContext = new ViewModels.MainPageViewModel("tomorrow");
+            BindingContext = new MainPageViewModel(date);
         }
     }
 

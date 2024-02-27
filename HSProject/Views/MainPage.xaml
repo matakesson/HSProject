@@ -91,7 +91,7 @@
                     Grid.Column="2"
                     Text="Yesterday"
                     BackgroundColor="{StaticResource Gray950}"
-                    Clicked="OnClickedYesterdayGames"
+                    Clicked="OnGamesButtonClicked"
                     TextColor="White"
                     FontSize="15"></Button>
                 <Button
@@ -99,14 +99,14 @@
                     Text="Today"
                     BackgroundColor="{StaticResource Gray950}"
                     TextColor="White"
-                    Clicked="OnClickedTodayGames"
+                    Clicked="OnGamesButtonClicked"
                     FontSize="15"></Button>
                 <Button
                     Grid.Column="6"
                     Text="Tomorrow"
                     BackgroundColor="{StaticResource Gray950}"
                     TextColor="White"
-                    Clicked="OnClickedTomorrowGames"
+                    Clicked="OnGamesButtonClicked"
                     FontSize="15"></Button>
             </Grid>
 

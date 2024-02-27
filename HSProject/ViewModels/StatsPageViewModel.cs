@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HSProject.ViewModels
 {
-    
+
     internal class StatsPageViewModel
     {
         public Models.Stats Stats { get; set; }
@@ -20,11 +20,11 @@ namespace HSProject.ViewModels
             var task = Task.Run(() => GetStatsAsync("CAR"));
             task.Wait();
             Stats = task.Result;
-            foreach(var s in Stats.skaters)
+            foreach (var s in Stats.skaters)
             {
                 CalculateRatingSkater(s);
             }
-            foreach(var g in Stats.goalies)
+            foreach (var g in Stats.goalies)
             {
                 CalculateRatingGoalie(g);
             }
@@ -49,7 +49,7 @@ namespace HSProject.ViewModels
         public static void CalculateRatingSkater(Models.Skater skater)
         {
             float rating = 6; // Starting point
-            
+
             //// Adjust rating based on various stats
             rating += skater.points * 0.1f;
             rating += skater.goals * 0.2f;
@@ -87,6 +87,6 @@ namespace HSProject.ViewModels
             // Ensure rating stays within 1-10 range
             goalie.averageRating = Math.Max(1, Math.Min(10, rating));
         }
-        
+
     }
 }

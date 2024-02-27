@@ -2,6 +2,8 @@ namespace HSProject.Views;
 
 public partial class BoxScorePage : ContentPage
 {
+    
+
 	public BoxScorePage()
 	{
 		InitializeComponent();

@@ -28,10 +28,8 @@ namespace HSProject.ViewModels
             var task = Task.Run(() => GetScoreAsync(todayDateString));
             var task3 = Task.Run(() => GetScoreAsync(yesterdayDateString));
             var task2 = Task.Run(() => GetScoreAsync(tomorrowDateString));
-           
-            task.Wait();
-            task2.Wait();
-            task3.Wait();
+
+            Task.WaitAll(task, task2, task3);
 
             ScoreTomorrow = task2.Result;
             ScoreToday = task.Result;
