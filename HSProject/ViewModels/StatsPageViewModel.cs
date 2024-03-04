@@ -13,11 +13,13 @@ namespace HSProject.ViewModels
 
     internal class StatsPageViewModel
     {
-        public Models.Stats Stats { get; set; }
+        public Models.Stats Stats { get; set; }  
 
-        public StatsPageViewModel()
+        public StatsPageViewModel(string team)
         {
-            var task = Task.Run(() => GetStatsAsync("CAR"));
+            // https://api.nhle.com/stats/rest/en/team
+
+            var task = Task.Run(() => GetStatsAsync(team));
             task.Wait();
             Stats = task.Result;
             foreach (var s in Stats.skaters)
@@ -88,5 +90,12 @@ namespace HSProject.ViewModels
             goalie.averageRating = Math.Max(1, Math.Min(10, rating));
         }
 
+        public void SortByLastName()
+        {
+            if (Stats != null && Stats.skaters != null)
+            {
+                Stats.skaters = Stats.skaters.OrderByDescending(x => x.lastName._default).ToArray();
+            }
+        }
     }
 }

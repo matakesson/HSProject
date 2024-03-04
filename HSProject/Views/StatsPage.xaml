@@ -5,6 +5,19 @@
              Title="StatsPage">
     <VerticalStackLayout>
 
+
+        <Entry
+            Placeholder="Search for a team"
+            x:Name="EntryTeam"></Entry>
+        <Button Text="Search" Clicked="OnSearchButtonClicked"></Button>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Last Name" Clicked="SortByLastNameClicked"></Button>
+            <Button Text="Goals" Clicked="SortByGoalsClicked"></Button>
+            <Button Text="Assists" Clicked="SortByAssistsClicked"></Button>
+            <Button Text="Rating" Clicked="SortByRatingClicked"></Button>
+        </StackLayout>
+
         <ListView ItemsSource="{Binding Stats.skaters}">
             <ListView.ItemTemplate>
                 <DataTemplate>
