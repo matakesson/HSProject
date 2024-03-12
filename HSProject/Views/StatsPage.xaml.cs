@@ -5,47 +5,85 @@ namespace HSProject.Views;
 
 public partial class StatsPage : ContentPage
 {
-    private ViewModels.StatsPageViewModel viewModel;
+    private ViewModels.StatsPageViewModel _viewModel;
+    static SearchedTeam team = SearchedTeam.GetInstance();
 
 	public StatsPage()
 	{
 		InitializeComponent();
-        viewModel = new ViewModels.StatsPageViewModel("CAR");
-        BindingContext = viewModel;
+        string lastSearchedTeam = team.GetLastSearchedTeam();
+        _viewModel = new ViewModels.StatsPageViewModel(lastSearchedTeam);
+        BindingContext = _viewModel;
 	}
 
 	private async void OnSearchButtonClicked(object sender, EventArgs e)
 	{
-		BindingContext = new ViewModels.StatsPageViewModel(EntryTeam.Text);
+        _viewModel = new ViewModels.StatsPageViewModel(EntryTeam.Text);
+        BindingContext = _viewModel;
+        _viewModel.FetchStatsForTeam(EntryTeam.Text);
+        team.SaveLastSearchedTeam(EntryTeam.Text);
+        UpdateListView();
     }
 
     private async void SortByLastNameClicked(object sender, EventArgs e)
     {
-        viewModel.SortByLastName();
-        if (!string.IsNullOrEmpty(EntryTeam.Text))
-        {
-            BindingContext = new StatsPageViewModel(EntryTeam.Text);
-        }
-        else
-        {
-            BindingContext = new StatsPageViewModel("CAR");
-            int i = 0;
-        }
+        _viewModel.SortByLastName();
+        UpdateListView();
     }
 
     private void SortByGoalsClicked(object sender, EventArgs e)
     {
-        //viewModel.SortByGoals();
+        _viewModel.SortByGoals();
+        UpdateListView();
     }
 
     private void SortByAssistsClicked(object sender, EventArgs e)
     {
-        //viewModel.SortByAssist();
+        _viewModel.SortByAssists();
+        UpdateListView();
     }
 
     private void SortByRatingClicked(object sender, EventArgs e)
     {
-        //viewModel.SortByRating();
+        _viewModel.SortByRating();
+        UpdateListView();
     }
-    
+    private void UpdateListView()
+    {
+        var statsPageViewModel = BindingContext as ViewModels.StatsPageViewModel;
+        if (statsPageViewModel != null)
+        {
+            StatsListView.ItemsSource = null;
+            StatsListView.ItemsSource = statsPageViewModel.Stats.skaters;
+        }
+    }
+
+}
+
+// Singleton pattern to save searched team
+internal class SearchedTeam
+{
+    private static SearchedTeam _instance = new SearchedTeam();
+
+    private string _lastSearchedTeam = "CAR";
+
+    public static SearchedTeam GetInstance()
+    {
+        return _instance;
+    }
+
+    private SearchedTeam()
+    {
+
+    }
+
+    public string GetLastSearchedTeam()
+    {
+        return _lastSearchedTeam;
+    }
+
+    public void SaveLastSearchedTeam(string team)
+    {
+        _lastSearchedTeam = team;
+    }
 }

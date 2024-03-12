@@ -5,6 +5,7 @@ namespace HSProject
 {
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
@@ -42,6 +43,8 @@ namespace HSProject
             InitializeComponent();
             BindingContext = new MainPageViewModel(date);
         }
-    }
+        
+
+}
 
 }

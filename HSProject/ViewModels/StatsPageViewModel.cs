@@ -13,15 +13,23 @@ namespace HSProject.ViewModels
 
     internal class StatsPageViewModel
     {
-        public Models.Stats Stats { get; set; }  
+        public Models.Stats Stats { get; set; }
 
         public StatsPageViewModel(string team)
         {
             // https://api.nhle.com/stats/rest/en/team
 
+            FetchStatsForTeam(team);
+        }
+
+        public async void FetchStatsForTeam(string team)
+        {
+
             var task = Task.Run(() => GetStatsAsync(team));
             task.Wait();
             Stats = task.Result;
+            
+            // implement try catch
             foreach (var s in Stats.skaters)
             {
                 CalculateRatingSkater(s);
@@ -31,7 +39,6 @@ namespace HSProject.ViewModels
                 CalculateRatingGoalie(g);
             }
         }
-
 
         public static async Task<Models.Stats> GetStatsAsync(string team)
         {
@@ -90,11 +97,36 @@ namespace HSProject.ViewModels
             goalie.averageRating = Math.Max(1, Math.Min(10, rating));
         }
 
+
+        
+
         public void SortByLastName()
         {
             if (Stats != null && Stats.skaters != null)
             {
-                Stats.skaters = Stats.skaters.OrderByDescending(x => x.lastName._default).ToArray();
+                Stats.skaters = Stats.skaters.OrderBy(x => x.lastName._default).ToArray();
+
+            }
+        }
+        public void SortByGoals()
+        {
+            if(Stats !=  null && Stats.skaters != null)
+            {
+                Stats.skaters = Stats.skaters.OrderByDescending(x => x.goals).ToArray();
+            }
+        }
+        public void SortByAssists()
+        {
+            if(Stats != null && Stats.skaters != null)
+            {
+                Stats.skaters = Stats.skaters.OrderByDescending(x => x.assists).ToArray();
+            }
+        }
+        public void SortByRating()
+        {
+            if(Stats != null && Stats.skaters != null)
+            {
+                Stats.skaters = Stats.skaters.OrderByDescending(x => x.averageRating).ToArray();
             }
         }
     }

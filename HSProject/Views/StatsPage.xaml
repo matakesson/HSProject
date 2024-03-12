@@ -18,7 +18,7 @@
             <Button Text="Rating" Clicked="SortByRatingClicked"></Button>
         </StackLayout>
 
-        <ListView ItemsSource="{Binding Stats.skaters}">
+        <ListView x:Name="StatsListView" ItemsSource="{Binding Stats.skaters}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
