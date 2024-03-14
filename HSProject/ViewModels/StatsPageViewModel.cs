@@ -28,16 +28,19 @@ namespace HSProject.ViewModels
             var task = Task.Run(() => GetStatsAsync(team));
             task.Wait();
             Stats = task.Result;
-            
-            // implement try catch
-            foreach (var s in Stats.skaters)
+
+            if (Stats != null)
             {
-                CalculateRatingSkater(s);
+                foreach (var s in Stats.skaters)
+                {
+                    CalculateRatingSkater(s);
+                }
+                foreach (var g in Stats.goalies)
+                {
+                    CalculateRatingGoalie(g);
+                }
             }
-            foreach (var g in Stats.goalies)
-            {
-                CalculateRatingGoalie(g);
-            }
+
         }
 
         public static async Task<Models.Stats> GetStatsAsync(string team)
@@ -97,8 +100,6 @@ namespace HSProject.ViewModels
             goalie.averageRating = Math.Max(1, Math.Min(10, rating));
         }
 
-
-        
 
         public void SortByLastName()
         {

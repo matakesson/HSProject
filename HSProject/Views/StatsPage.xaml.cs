@@ -54,10 +54,19 @@ public partial class StatsPage : ContentPage
         if (statsPageViewModel != null)
         {
             StatsListView.ItemsSource = null;
-            StatsListView.ItemsSource = statsPageViewModel.Stats.skaters;
+            try
+            {
+                if(statsPageViewModel.Stats != null)
+                {
+                    StatsListView.ItemsSource = statsPageViewModel.Stats.skaters;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                StatsListView.ItemsSource = null;
+            }
         }
     }
-
 }
 
 // Singleton pattern to save searched team

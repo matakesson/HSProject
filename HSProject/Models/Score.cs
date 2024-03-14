@@ -61,6 +61,7 @@ namespace HSProject.Models
         public Perioddescriptor periodDescriptor { get; set; }
         public Gameoutcome gameOutcome { get; set; }
         public Goal[] goals { get; set; }
+        public Goal? LastScorer { get; set; }
     }
 
     public class Venue

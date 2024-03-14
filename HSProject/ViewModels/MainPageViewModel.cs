@@ -14,6 +14,7 @@ namespace HSProject.ViewModels
         public Models.Score ScoreTomorrow { get; set; }
         public Models.Score ScoreOnDisplay { get; set; }
         public Models.Score ScoreYesterday { get; set; }
+
         
 
 
@@ -69,6 +70,20 @@ namespace HSProject.ViewModels
             {
                 ScoreOnDisplay = ScoreTomorrow;
             }
+            GetLastScorer();
+
         }
+
+        public void GetLastScorer()
+        {
+            foreach(Models.Game game in ScoreOnDisplay.games)
+            {
+                if (game.goals != null)
+                {
+                    game.LastScorer = game.goals.Last();
+                }
+            }
+        }
+        
     }
 }

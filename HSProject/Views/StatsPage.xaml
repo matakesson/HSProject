@@ -7,8 +7,10 @@
 
 
         <Entry
-            Placeholder="Search for a team"
-            x:Name="EntryTeam"></Entry>
+            Placeholder="Search for a team (Ana, Edm, Tor, for example)"
+            x:Name="EntryTeam"
+            BackgroundColor="{StaticResource Black}"
+            TextColor="White"></Entry>
         <Button Text="Search" Clicked="OnSearchButtonClicked"></Button>
 
         <StackLayout Orientation="Horizontal">
@@ -18,14 +20,15 @@
             <Button Text="Rating" Clicked="SortByRatingClicked"></Button>
         </StackLayout>
 
-        <ListView x:Name="StatsListView" ItemsSource="{Binding Stats.skaters}">
+        <ListView x:Name="StatsListView" ItemsSource="{Binding Stats.skaters}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid   Padding="5"
                                 RowDefinitions="10, *"
                                 ColumnDefinitions="80, 80, 80, 80, *"
-                                ColumnSpacing="5">
+                                ColumnSpacing="5"
+                                BackgroundColor="{StaticResource BGGray}">
                             <Image
                                 Grid.Column="0"
                                 Grid.Row="2"
@@ -39,21 +42,24 @@
                                 HorizontalOptions="Start"
                                 VerticalOptions="Center"
                                 FontSize="15"
-                                TextColor="DarkBlue"></Label>
+                                TextColor="White"></Label>
                             <Label
                                 Grid.Column="3"
                                 Grid.Row="2"
+                                TextColor="White"
                                 Text="{Binding goals, StringFormat='Goals: {0}'}"
                                 FontSize="15"></Label>
                             <Label
                                 Grid.Column="4"
                                 Grid.Row="2"
                                 HorizontalOptions="Center"
+                                TextColor="White"
                                 Text="{Binding assists, StringFormat='Assists: {0}'}"
                                 FontSize="15"></Label>
                             <Label
                                 Grid.Column="5"
                                 Grid.Row="2"
+                                TextColor="White"
                                 HorizontalOptions="End"
                                 Text="{Binding averageRating, StringFormat='Rating: {0}'}"
                                 FontSize="15"></Label>

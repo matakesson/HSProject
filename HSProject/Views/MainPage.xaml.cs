@@ -39,12 +39,14 @@ namespace HSProject
         {
             var button = (Button)sender;
             string date = button.Text.ToLower(); 
-
-            InitializeComponent();
+            
             BindingContext = new MainPageViewModel(date);
         }
-        
 
-}
+        private async void OnClickedGoToStandings(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.StandingsPage());
+        }
+    }
 
 }

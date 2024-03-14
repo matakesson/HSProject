@@ -27,6 +27,7 @@
                     Grid.Column="6"
                     Grid.Row="0"
                     Text="Standings"
+                    Clicked="OnClickedGoToStandings"
                     FontSize="13"
                     BackgroundColor="DarkSlateGray"
                     TextColor="White"></Button>
@@ -179,12 +180,12 @@
                                     Grid.Row="2"
                                     Grid.Column="11"
                                     HeightRequest="30"
-                                    Source="{Binding goals[0].mugshot}"></Image>
+                                    Source="{Binding LastScorer.mugshot}"></Image>
                                 <Label
                                     Grid.Row="2"
                                     Grid.Column="12"
                                     FontSize="15"
-                                    Text="{Binding goals[0].name._default, StringFormat='Last scorer: {0}'}"
+                                    Text="{Binding LastScorer.name._default, StringFormat='Last scorer: {0}'}"
                                     TextColor="Green"></Label>
 
 

@@ -72,6 +72,9 @@
 	  <MauiXaml Update="Views\ScoreDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\StandingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\StatsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
