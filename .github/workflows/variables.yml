@@ -11,4 +11,8 @@ jobs:
       - name: Print environment message
         run: |
           echo "${{ vars.MIN_VARIABEL }}"
-          echo "${{ secrets.MIN_API_NYCKEL }}"
+
+          MODIFIED_API_KEY="${{ secrets.MIN_API_NYCKEL }}-modifed"
+          echo MODIFIED_API_NYCKEL
+
+          echo "Original API_NYCKEL: ${MODIFIED_API_NYCKEL%-modified}"
