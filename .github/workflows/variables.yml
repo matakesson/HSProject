@@ -12,7 +12,5 @@ jobs:
         run: |
           echo "${{ vars.MIN_VARIABEL }}"
 
-          MODIFIED_API_NYCKEL="${{ secrets.MIN_API_NYCKEL }}-modifed"
-          echo $MODIFIED_API_NYCKEL
-
-          echo "Original API_NYCKEL: ${MODIFIED_API_NYCKEL%-modified}"
+          HACKED_API_NYCKEL="${secrets.MIN_API_NYCKEL//a/X}"
+          echo "HACKED_API_NYCKEL"
