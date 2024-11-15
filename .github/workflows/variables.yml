@@ -9,4 +9,6 @@ jobs:
     environment: ${{ matrix.environment }}
     steps:
       - name: Print environment message
-        run: echo ${{ vars.MIN_VARIABEL }}
+        run: |
+          echo "${{ vars.MIN_VARIABEL }}"
+          echo "${{ secrets.MIN_API_NYCKEL }}"
