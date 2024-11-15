@@ -1,0 +1,12 @@
+name: test-matrix-enviroments
+on: workflow_dispatch
+jobs: 
+  print-my-variabels:
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix:
+        environment: [Test, Development, Production]
+    environment: ${{ matrix.environment }}
+    steps:
+      - name: Print environment message
+        run: echo ${{ vars.MIN_VARIABEL }}
