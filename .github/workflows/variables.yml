@@ -11,6 +11,3 @@ jobs:
       - name: Print environment message
         run: |
           echo "${{ vars.MIN_VARIABEL }}"
-
-          HACKED_API_NYCKEL="${secrets.MIN_API_NYCKEL//a/X}"
-          echo "HACKED_API_NYCKEL"
